@@ -5,6 +5,9 @@ GEM
     htmlbeautifier (1.4.3)
     markaby (0.9.4)
       builder
+    mini_portile2 (2.8.9)
+    sqlite3 (2.6.0)
+      mini_portile2 (~> 2.8.0)
     sqlite3 (2.6.0-aarch64-linux-gnu)
     sqlite3 (2.6.0-aarch64-linux-musl)
     sqlite3 (2.6.0-arm-linux-gnu)
@@ -34,7 +37,7 @@ DEPENDENCIES
   sqlite3
 
 RUBY VERSION
-   ruby 3.4.7p58
+  ruby 4.0.2
 
 BUNDLED WITH
-   2.6.2
+  4.0.11
