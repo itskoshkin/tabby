@@ -36,13 +36,20 @@ https://gorails.com/setup/macos/15-sequoia
 5. Run `ruby tabby.rb` to export your tab groups to the desktop.
 
 ### 4. Optional steps
-- Need to customize the export location? Pass `--out file/path` to the tabby command, as in:
-  `ruby tabby.rb --out ~/Library/Backup`
-- Need to run on a specific `SafariTabs.db`? Pass `--db path/to/SafariTabs.db` to the tabby command, as in:
-  `ruby tabby.rb --db ~/Backups/SafariTabs.db`
+- Need to customize the export location? Add this flag: `--out file/path`
+  ```
+  ruby tabby.rb --out ~/Library/Backup
+  ```
+- Need to export a different `SafariTabs.db` file? Add this flag: `--db path/to/SafariTabs.db`
+  ```
+  ruby tabby.rb --db ~/Backups/SafariTabs.db
+  ```
+- Need to export tabs from the Safari Technology Preview app? Add this flag: `-stp`
+  ```
+  ruby tabby.rb -stp
+  ```
 - Need to move tabby to a different location? The script should work in any location within your home directory.
 - Need to backup your tab groups on a daily basis? Just write a cron task that runs the tabby command!
-- Using Safari Technology Preview? Add the `-stp` flag, as in `ruby tabby.rb -stp`.
 
 ## Feedback
 Have a suggestion? Your feedback is welcome! Feel free to open an issue or PR.
