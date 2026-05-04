@@ -13,6 +13,8 @@ Tabby can:
 - Export tab groups from all other profiles
 - Export tab groups in current order (including tab order within groups)
 
+**New:** _[Tabby is now available as a macOS app!](https://littletabby.app)_
+
 ## Installation
 
 ### 1. Install ruby
