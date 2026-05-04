@@ -56,8 +56,7 @@ begin
   end
 
   # Export tab groups to CSV and HTML
-  groups = [personal]
-  groups << profiles.flatten unless profiles.empty?
+  groups = [personal] + profiles
   groups.each do |profile|
     profile, query = profile
     tab_groups = db.execute(query)

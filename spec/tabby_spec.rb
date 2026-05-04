@@ -129,35 +129,40 @@ RSpec.describe "Tabby" do
     end
 
     describe "multiple profiles" do
+      let(:fixture_db) { File.expand_path("fixtures/SafariTabs.db", __dir__) }
+
       before do
-        SafariDbFactory.build(db_path, profiles: {
-          "Work" => {
-            "Engineering" => [
-              { title: "GitHub",    url: "https://github.com" },
-              { title: "Anthropic", url: "https://www.anthropic.com" },
-            ],
-          },
-        })
-        run_tabby("--db", db_path, "--out", output_dir)
+        run_tabby("--db", fixture_db, "--out", output_dir)
       end
 
-      it "still exports the personal profile" do
+      it "exports the personal profile" do
         expect(Dir).to exist(File.join(output_dir, "tabgroups", "personal"))
       end
 
-      it "creates a directory for the additional profile (lower-cased)" do
+      it "exports every additional profile (lower-cased)" do
         expect(Dir).to exist(File.join(output_dir, "tabgroups", "work"))
+        expect(Dir).to exist(File.join(output_dir, "tabgroups", "space"))
       end
 
-      it "writes the profile's CSV with its bookmarks" do
-        titles = CSV.read(File.join(output_dir, "tabgroups", "work", "bookmarks.csv"))[1..].map { |row| row[1] }
-        expect(titles).to include("GitHub", "Anthropic")
+      it "writes the personal profile's tab groups" do
+        groups = CSV.read(File.join(output_dir, "tabgroups", "personal", "bookmarks.csv"))[1..].map { |row| row[0] }.uniq
+        expect(groups).to include("Reference", "Technology")
       end
 
-      it "writes the profile's HTML with the capitalized profile name" do
-        html = File.read(File.join(output_dir, "tabgroups", "work", "bookmarks.html"))
-        expect(html).to include("<H1>Work Bookmarks</H1>")
-        expect(html).to include('<a href="https://github.com">GitHub</a>')
+      it "writes each additional profile's CSV with its bookmarks" do
+        work_titles  = CSV.read(File.join(output_dir, "tabgroups", "work",  "bookmarks.csv"))[1..].map { |row| row[1] }
+        space_titles = CSV.read(File.join(output_dir, "tabgroups", "space", "bookmarks.csv"))[1..].map { |row| row[1] }
+        expect(work_titles).to include("YouTube", "Twitch")
+        expect(space_titles).to include("SpaceX", "Home | Blue Origin")
+      end
+
+      it "writes each additional profile's HTML with the capitalized profile name" do
+        work_html  = File.read(File.join(output_dir, "tabgroups", "work",  "bookmarks.html"))
+        space_html = File.read(File.join(output_dir, "tabgroups", "space", "bookmarks.html"))
+        expect(work_html).to include("<H1>Work Bookmarks</H1>")
+        expect(work_html).to include('<a href="https://www.youtube.com/">YouTube</a>')
+        expect(space_html).to include("<H1>Space Bookmarks</H1>")
+        expect(space_html).to include('<a href="https://www.spacex.com/">SpaceX</a>')
       end
     end
   end
