@@ -17,11 +17,10 @@ Tabby can:
 
 ## Installation
 
-### 1. Install ruby
-Unfortunately, macOS includes an outdated version of Ruby, so you will need to install a modern version of Ruby (4.0.2 or higher) to use Tabby.
+### 1. Install Go
+Install Go 1.26 or newer:
 
-If you need to install ruby, follow this guide:
-https://gorails.com/setup/macos/15-sequoia
+https://go.dev/doc/install
 
 ### 2. Enable full disk permissions for Terminal app
 1. Open System Settings.
@@ -34,24 +33,38 @@ https://gorails.com/setup/macos/15-sequoia
 1. `git clone git@github.com:mokolabs/tabby.git ~/Desktop/tabby`
 2. Open your terminal app.
 3. Run `cd ~/Desktop/tabby` to open the tabby directory.
-4. Run `bundle install` to install dependencies.
-5. Run `ruby tabby.rb` to export your tab groups to the desktop.
+4. Run `go run .` to export your tab groups to the desktop.
+
+You can also build a reusable binary:
+
+```
+go build -o tabby
+./tabby
+```
 
 ### 4. Optional steps
 - Need to customize the export location? Add this flag: `--out file/path`
   ```
-  ruby tabby.rb --out ~/Library/Backup
+  go run . --out ~/Library/Backup
   ```
 - Need to export a different `SafariTabs.db` file? Add this flag: `--db path/to/SafariTabs.db`
   ```
-  ruby tabby.rb --db ~/Backups/SafariTabs.db
+  go run . --db ~/Backups/SafariTabs.db
   ```
 - Need to export tabs from the Safari Technology Preview app? Add this flag: `-stp`
   ```
-  ruby tabby.rb -stp
+  go run . -stp
   ```
 - Need to move tabby to a different location? The script should work in any location within your home directory.
 - Need to backup your tab groups on a daily basis? Just write a cron task that runs the tabby command!
+
+## Development
+
+Run the test suite with:
+
+```
+go test ./...
+```
 
 ## Feedback
 Have a suggestion? Your feedback is welcome! Feel free to open an issue or PR.
