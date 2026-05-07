@@ -1,1 +1,7 @@
-.vscode
+# macOS
+.DS_Store
+# IDEs
+.idea/
+# Project
+*.log
+build/
