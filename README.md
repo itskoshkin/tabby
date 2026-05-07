@@ -1,74 +1,47 @@
-Tabby
-======
-Backup your Safari tab groups with Tabby.
+# Tabby
 
-Safari tab groups are an awesome way to manage your bookmarks. But, unfortunately at the moment, Safari does not provide a way to backup bookmarks stored within tab groups.
-
-So let's fix that.
+Safari tab groups are an awesome way to manage your tabs. But, unfortunately, at this moment Safari does not provide any way to export them.
 
 Tabby can:
-- Export tab groups as HTML
-- Export tab groups as CSV
-- Export tab groups from default profile
-- Export tab groups from all other profiles
+- Export tab groups as HTML or CSV
+- Export tab groups from any selected other profiles
 - Export tab groups in current order (including tab order within groups)
 
-**New:** _[Tabby is now available as a macOS app!](https://littletabby.app)_
+## Run
 
-## Installation
+0. [Install Go 1.26 or newer](https://go.dev/doc/install)
+1. Clone repository
+    ```bash
+    git clone https://github.com/itskoshkin/tabby.git && cd tabby
+    ```
+2. Run
+    ```bash
+    go run .
+    ```
+3. Build a reusable binary
+    ```
+    go build -o tabby
+    ./tabby
+    ```
 
-### 1. Install Go
-Install Go 1.26 or newer:
-
-https://go.dev/doc/install
-
-### 2. Enable full disk permissions for Terminal app
-1. Open System Settings.
-2. Select Privacy & Security settings.
-3. Select Full Disk Access.
-4. Add Terminal app if not listed.
-5. Enable Full Disk Access for Terminal app.
-
-### 3. Install script
-1. `git clone git@github.com:mokolabs/tabby.git ~/Desktop/tabby`
-2. Open your terminal app.
-3. Run `cd ~/Desktop/tabby` to open the tabby directory.
-4. Run `go run .` to export your tab groups to the desktop.
-
-You can also build a reusable binary:
-
-```
-go build -o tabby
-./tabby
-```
-
-### 4. Optional steps
-- Need to customize the export location? Add this flag: `--out file/path`
+## Args
+- Customize the export location
   ```
   go run . --out ~/Library/Backup
   ```
-- Need to export a different `SafariTabs.db` file? Add this flag: `--db path/to/SafariTabs.db`
+- Export a different `SafariTabs.db` file
   ```
-  go run . --db ~/Backups/SafariTabs.db
+  go run . --db path/to/SafariTabs.db
   ```
-- Need to export tabs from the Safari Technology Preview app? Add this flag: `-stp`
+- Export tabs from the Safari Technology Preview app
   ```
   go run . -stp
   ```
-- Need to move tabby to a different location? The script should work in any location within your home directory.
-- Need to backup your tab groups on a daily basis? Just write a cron task that runs the tabby command!
+- Export tabs regularly with cron
+  ```
+  crontab -e
+  ```
 
-## Development
+## Cat
 
-Run the test suite with:
-
-```
-go test ./...
-```
-
-## Feedback
-Have a suggestion? Your feedback is welcome! Feel free to open an issue or PR.
-
-(Tabby is brought to you by Sebbie.)
-
-![Sebbie](sebbie.jpg)
+![Sebbie](https://github.com/itskoshkin/tabby/blob/origin/sebbie.jpg)
